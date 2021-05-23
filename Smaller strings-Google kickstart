@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t,i;
+    cin>>t;
+    for(i=1;i<=t;i++)
+    {
+        int n,k,mid1,mid2;
+        long long pro=1,x=1,y=1;
+        cin>>n>>k;
+        string s;
+        cin>>s;
+        if(n==2)
+        {
+            cout<<((int)s[0]-96)%(k+1)<<"\n";
+            continue;
+        }
+        if(n%2==0)
+        {
+            mid1=n/2;
+            mid2=mid1-1;
+            pro=(((int)s[mid1]-97)%(k+1))*(((int)s[mid2]-97)%(k+1));
+            for(int j=0;j<mid2;j++)
+            {
+                pro*=((int)s[j]-96)%(k+1);
+                y*=((int)s[j]-96)%(k+1);
+                if(j!=mid2-1)
+                x*=((int)s[j]-96)%(k+1);
+            }
+            string s1=s.substr(mid1+1,n);
+            string s2=s.substr(0,mid2);
+            if(s1>=s2)
+            {
+                    pro*=x;
+                    pro*=((int)s[mid2-1]-97)%(k+1);
+            }
+            else
+            {
+                pro*=y;
+            }
+            cout<<pro<<"\n";
+        }
+        else
+        {
+            mid1=n/2;
+            pro=((int)s[mid1]-97)%(k+1);
+            for(int j=0;j<mid1;j++)
+            {
+                pro*=((int)s[j]-96)%(k+1);
+                y*=((int)s[j]-96)%(k+1);
+                if(j!=mid1-1)
+                x*=((int)s[j]-96)%(k+1);
+            }
+            string s1=s.substr(mid1+1,n);
+            string s2=s.substr(0,mid1);
+            if(s1<s2)
+            {
+                    pro*=x;
+                    pro*=((int)s[mid1-1]-97)%(k+1);
+            }
+            else
+            {
+                pro*=y;
+            }
+            cout<<pro<<"\n";
+        }
+    }
+}
