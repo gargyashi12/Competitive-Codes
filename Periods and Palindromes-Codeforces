@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,k;
+        cin>>n>>k;
+        string s;
+        cin>>s;
+        int c=0,max=0,maxi,f=1;
+        for(int i=0;i<k/2;i++)
+        {
+            int freq[26]={0};
+            max=0;
+            maxi=0;
+            for(int j=i;j<n;j=j+k)
+            {
+                freq[(int)s[j]-97]++;
+                freq[(int)s[j+k-f]-97]++;
+                if(freq[(int)s[j]-97]>max)
+                {
+                    max=freq[(int)s[j]-97];
+                    maxi=(int)s[j]-97;
+                }
+                if(freq[(int)s[j+k-f]-97]>max)
+                {
+                    max=freq[(int)s[j+k-f]-97];
+                    maxi=(int)s[j+k-f]-97;
+                }
+            }
+            for(int x=0;x<26;x++)
+            {
+                if(x!=maxi)
+                c+=freq[x];
+            }
+            f=f+2;
+        }
+        int freq[26]={0};
+        max=0;
+        maxi=0;
+        if(k%2!=0)
+        {
+            for(int i=k/2;i<n;i=i+k)
+            {
+                freq[(int)s[i]-97]++;
+                if(freq[(int)s[i]-97]>max)
+                {
+                    max=freq[(int)s[i]-97];
+                    maxi=(int)s[i]-97;
+                }
+            }
+            for(int i=0;i<26;i++)
+            {
+                if(i!=maxi)
+                c+=freq[i];
+            }
+        }
+        cout<<c<<"\n";
+    }
+}
