@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& a) {
+        for(int i=0;i<a.size();i++)
+        {
+            if(a[i][0]==-1)
+                continue;
+            for(int j=i+1;j<a.size();j++)
+            {
+              if(a[i][1]>=a[j][0] && a[j][1]>=a[i][0])
+                {
+                    a[j][0]=min(a[i][0],a[j][0]);
+                    a[j][1]=max(a[i][1],a[j][1]);
+                    a[i][0]=-1;
+                    a[i][1]=-1;
+                    break;
+                }
+            }
+        }
+        vector<vector<int>> b;
+        for(int i=0;i<a.size();i++)
+        {
+            vector <int>f;
+            if(a[i][0]!=-1)
+            {
+                f.push_back(a[i][0]);
+                f.push_back(a[i][1]);
+                b.push_back(f);
+            }
+        }
+        return b;
+    }
+};
