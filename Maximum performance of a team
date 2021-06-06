@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        long long sum=0,mx=0;
+        int cnt=0;
+        for(int i=0;i<n;i++)
+        {
+            cnt=0;
+            sum=speed[i];
+            if(sum*efficiency[i]>mx)
+                mx=sum*efficiency[i];
+            if(k==1)
+            continue;
+            map <int,int> m;
+            for(int j=0;j<n;j++)
+            {
+                if(j!=i && efficiency[j]>=efficiency[i])
+                    m[speed[j]]++;
+            }
+            for(auto i=m.rbegin();i!=m.rend();i++)
+            {
+                sum+=i->first*i->second;
+                cnt=cnt+i->second;
+                if(cnt==k-1)
+                    break;
+            }
+            if(sum*efficiency[i]>mx)
+                    mx=sum*efficiency[i];
+        }
+        return mx%1000000007;
+    }
+};
