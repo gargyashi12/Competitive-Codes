@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        vector<vector<int>> x;
+        multimap<int,pair<int,int>>m;
+        for(int i=0;i<points.size();i++)
+        {
+          int sq=abs(points[i][0]*points[i][0])+abs(points[i][1]*points[i][1]);
+            m.insert(make_pair(sq,make_pair(points[i][0],points[i][1])));
+        }
+        int c=0;
+        for(auto it=m.begin();it!=m.end();it++)
+        {
+            c++;
+            vector <int>f;
+            f.push_back(it->second.first);
+            f.push_back(it->second.second);
+            x.push_back(f);
+            if(c==k)
+                break;
+        }
+        return x;
+    }
+};
