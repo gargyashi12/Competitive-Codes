@@ -1,0 +1,34 @@
+class Solution
+{
+    public:
+    vector <int> calculateSpan(int price[], int n)
+    {
+        vector<pair<int,int>> v;
+        int sum,j;
+        v.push_back(make_pair(1,0));
+       for(int i=1;i<n;i++)
+       {
+           if(price[i]<price[i-1])
+           v.push_back(make_pair(1,i));
+           else
+           {
+               sum=1;
+               for(j=i-1;j>=0;j--)
+               {
+                   if(price[j]<=price[i])
+                   {
+                       sum+=v[j].first;
+                       j=v[j].second;
+                   }
+                   else
+                   break;
+               }
+               v.push_back(make_pair(sum,j+1));
+           }
+       }
+       vector <int> x;
+       for(int i=0;i<v.size();i++)
+       x.push_back(v[i].first);
+       return x;
+    }
+};
