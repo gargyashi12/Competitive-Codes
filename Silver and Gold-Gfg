@@ -1,0 +1,35 @@
+ class Solution{
+public:
+    string flipCoins(int N, string s){
+        int c=0;
+        string flag="Yes";
+        stack <char> st;
+        for(int i=0;i<N;i++)
+        st.push(s[i]);
+        while(!st.empty())
+        {
+            if(st.size()==1 && st.top()=='0')
+            {
+                flag="No";
+                break;
+            }
+            if(st.top()=='0')
+            {
+                st.pop();
+                if(st.top()=='1')
+                 {
+                     st.pop();
+                     st.push('0');
+                 }
+                else
+                {
+                    st.pop();
+                }
+            }
+            else
+            st.pop();
+        }
+        
+        return flag;
+    }
+};
