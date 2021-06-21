@@ -1,0 +1,17 @@
+void removeLoop(Node* head)
+    {
+        // code here
+        // just remove the loop without losing any nodes
+        Node *temp=head,*prev=head;
+        while(temp!=NULL)
+        {
+            if(temp->data==-1)
+            {
+                prev->next=NULL;
+                return;
+            }
+            temp->data=-1;
+            prev=temp;
+            temp=temp->next;
+        }
+    }
