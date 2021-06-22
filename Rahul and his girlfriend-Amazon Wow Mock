@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+int n,m;
+int compute(vector <string> a)
+{
+	int r[n+2][m+2];
+	memset(r,0,sizeof(r));
+	for(int j=m-1;j>=0;j--)
+	{
+		for(int i=0;i<n;i++)
+		{
+			if(a[i][j]=='0')
+			r[i][j]=0;
+			else
+			r[i][j]=r[i][j+1]+1;
+		}
+	}
+	int x[n]={0},mx=0;
+	for(int j=m;j>=0;j--)
+	{
+		for(int i=0;i<n;i++)
+		x[i]=r[i][j];
+		sort(x,x+n);
+		for(int i=0;i<n;i++)
+		{
+			if((x[i]*(n-i))>mx)
+			mx=x[i]*(n-i);
+		}
+	}
+	return mx;
+}
+int main()
+{
+	cin>>n>>m;
+	vector <string> a;
+	for(int i=0;i<n;i++)
+	{
+		string s;
+		cin>>s;
+		a.push_back(s);
+	}
+	cout<<compute(a);
+}
