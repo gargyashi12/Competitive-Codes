@@ -1,0 +1,49 @@
+# include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main ()
+{
+  int t;
+  cin>>t;
+  while(t--)
+  {
+    int n,k;
+    cin>>n>>k;
+    long long a[n];
+    for(int i=0;i<n;i++)
+      cin>>a[i];
+    vector <int> w;
+    int cnt=0;
+    for(int i=0;i<k;i++)
+    {
+      int f;
+      cin>>f;
+      if(f==1)
+      cnt++;
+      else
+      w.push_back(f);
+    }
+    sort(a,a+n);
+    if(w.size()>0)
+    sort(w.begin(),w.end());
+    int j=0;
+    long long mx=0;
+    int ptr=w.size()-1;
+    for(int i=n-1-cnt;i>=0;i--)
+    {
+      if(ptr<0)
+      break;
+      mx+=a[i]+a[j];
+      j=j+w[ptr]-1;
+      ptr--;
+    }
+    int x=n-1;
+    for(int i=1;i<=cnt;i++)
+    {
+      mx+=2*(a[x]);
+      x--;
+    }
+    cout<<mx<<"\n";
+  }
+}
