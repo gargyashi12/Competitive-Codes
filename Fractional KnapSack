@@ -1,0 +1,27 @@
+double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        multiset <pair<double,int> > s;
+        for(int i=0;i<n;i++)
+        {
+            double x=((double)arr[i].value)/arr[i].weight;
+            s.insert(make_pair(x,i));
+        }
+        double mx=0;
+        for(auto it=s.rbegin();it!=s.rend();it++)
+        {
+            if(W==0)
+            break;
+            if(W-(arr[it->second].weight)>=0)
+            {
+                W=W-(arr[it->second].weight);
+                mx+=(arr[it->second].value);
+            }
+            else
+            {
+                mx+=((double)W/(arr[it->second].weight))*arr[it->second].value;
+                W=0;
+            }
+        }
+        return mx;
+    }
