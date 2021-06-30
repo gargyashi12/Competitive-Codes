@@ -1,0 +1,33 @@
+Tono has gathered all the FRIENDS for a grand chapo event. For winning the chapo, she has asked the FRIENDS for the solution to a simple problem.
+
+Our magical Tono has A apple candies and O orange candies. In one turn, she chooses an apple or an orange candy with equal probability, and turns it into the other type. Now, she asks the FRIENDS the expected number of turns she will follow this process until either the number of apple or the orange candies become 0.
+Input
+The first and the only line of input contains two integers A and O.
+
+
+Constraints
+1 <= A, O <= 109
+Output
+Output the single line corresponding to the expected number of turns Tono needs to complete the process.
+The answer is of the form p/q. Print it as (p*r)%1000000007 where r is modulo inverse of q with respect to 1000000007
+
+#include <bits/stdc++.h> // header file includes every Standard library
+using namespace std;
+#define ll long long
+ll findnum(ll ap,ll o,ll cnt,map<pair<ll,ll>,int>visited)
+{
+    if(ap==0 || o==0)
+    return cnt%1000000007;
+    if(visited[{ap,o}]==1)
+    return 0;
+    visited[{ap,o}]=1;
+    return max(findnum((ap-1)%1000000007,(o+1)%1000000007,(cnt+1)%1000000007,visited),findnum((ap+1)%1000000007,(o-1)%1000000007,(cnt+1)%1000000007,visited));
+}
+int main() {
+	// Your code here
+	ll apples,oranges;
+	cin>>apples>>oranges;
+	map<pair<ll,ll>,int>visited;
+	cout<<findnum(apples,oranges,0,visited);
+	return 0;
+}(Trial)
