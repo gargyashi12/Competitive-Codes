@@ -1,0 +1,17 @@
+int findFloor(vector<long long> v, long long n, long long x){
+        
+        // Your code here
+        ll l=0,h=n-1,op=-1;
+        while(l<=h)
+        {
+            ll mid=l+(h-l)/2;
+            if(x>=v[mid])
+            {
+                op=mid;
+                l=mid+1;
+            }
+            else
+            h=mid-1;
+        }
+        return op;
+    }
