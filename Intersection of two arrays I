@@ -1,0 +1,52 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        set <int> s;
+        if(nums1.size()<=nums2.size())
+        {
+            sort(nums2.begin(),nums2.end());
+            for(int i=0;i<nums1.size();i++)
+            {
+                int low=0,high=nums2.size()-1;
+                while(low<=high)
+                {
+                    int mid=low+(high-low)/2;
+                    if(nums2[mid]==nums1[i])
+                    {
+                        s.insert(nums1[i]);
+                        break;
+                    }
+                    else if(nums1[i]>nums2[mid])
+                        low=mid+1;
+                    else
+                        high=mid-1;
+                }
+            }
+        }
+        else
+        {
+            sort(nums1.begin(),nums1.end());
+            for(int i=0;i<nums2.size();i++)
+            {
+                int low=0,high=nums1.size()-1;
+                while(low<=high)
+                {
+                    int mid=low+(high-low)/2;
+                    if(nums1[mid]==nums2[i])
+                    {
+                        s.insert(nums2[i]);
+                        break;
+                    }
+                    else if(nums2[i]>nums1[mid])
+                        low=mid+1;
+                    else
+                        high=mid-1;
+                }
+            }
+        }
+        vector <int> v;
+        for(auto it=s.begin();it!=s.end();it++)
+            v.push_back(*it);
+        return v;
+    }
+};
