@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector <string> v;
+
+void solve(int i,int j,int n,int m,string op)
+{
+    if(i>n||j>m)
+    return;
+    if(i==n && j==m)
+    {
+        v.push_back(op);
+        return;
+    }
+    for(int k=1;k<=m-j;k++)
+    {
+        char ch=k+'0';
+        solve(i,j+k,n,m,op+"h"+ch);
+    }
+    for(int k=1;k<=n-i;k++)
+    {
+        char ch=k+'0';
+        solve(i+k,j,n,m,op+"v"+ch);
+    }
+    for(int k=1;k<=min(n,m);k++)
+    {
+        char ch=k+'0';
+        solve(i+k,j+k,n,m,op+"d"+ch);
+    }
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+    if(n==0 || m==0)
+    {
+        cout<<"[]";
+        exit(0);
+    }
+    solve(0,0,n-1,m-1,"");
+    cout<<"[";
+    for(int i=0;i<v.size()-1;i++)
+    cout<<v[i]<<", ";
+    if(v.size()>0)
+    cout<<v[v.size()-1];
+    cout<<"]";
+}
