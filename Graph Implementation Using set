@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Graph{
+    int v;
+    set <int>* adj;
+};
+
+Graph* CreateGraph(int V)
+{
+    Graph* g= new Graph;
+    g->v=V;
+    g->adj = new set <int> [V];
+    return g;
+}
+
+void addEdge(Graph* g, int src, int dest)
+{
+    g->adj[src].insert(dest);
+    g->adj[dest].insert(src);
+}
+
+void printGraph(Graph* g,int V)
+{
+    for(int i=0;i<V;i++)
+    {
+        cout<<i;
+        for(auto it=g->adj[i].begin();it!=g->adj[i].end();it++)
+            cout<<"->"<<*it;
+        cout<<"\n";
+    }
+}
+
+int main()
+{
+    int V,E;
+    cin>>V>>E;
+    Graph* g= CreateGraph(V);
+    for(int i=0;i<E;i++)
+    {
+        int x,y;
+        cin>>x>>y;
+        addEdge(g,x,y);
+    }
+    printGraph(g,V);
+}
