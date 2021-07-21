@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+void solve()
+{
+    ll n;
+    cin>>n;
+    ll sum=n*(n+1)/2;
+    vector <ll> s1,s2;
+    if(sum%2!=0)
+    cout<<"NO";
+    else
+    {
+        ll s=sum/2;
+        cout<<"YES\n";
+        for(ll i=n;i>0;i--)
+        {
+            if(i<=s)
+            {
+                s1.push_back(i);
+                s=s-i;
+            }
+            else
+            s2.push_back(i);
+        }
+        cout<<s1.size()<<"\n";
+        for(auto it=s1.begin();it!=s1.end();it++)
+        cout<<*it<<" ";
+        cout<<"\n"<<s2.size()<<"\n";
+        for(auto it=s2.begin();it!=s2.end();it++)
+        cout<<*it<<" ";
+    }
+}
+ 
+int main()
+{
+    int t=1;
+    while(t--)
+    {
+        solve();
+    }
+}
