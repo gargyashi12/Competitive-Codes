@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+ 
+void solve()
+{
+    string s;
+    cin>>s;
+    vector <int> freq(26,0);
+    int odd=0,n=s.length(),pos;
+    for(int i=0;i<n;i++)
+        freq[(int)s[i]-65]++;
+    for(int i=0;i<26;i++)
+    {
+        if(freq[i]%2!=0)
+        {
+            odd++;
+            pos=i;
+        }
+    }
+    if((n%2==0 && odd>0) || (n%2!=0 && odd!=1))
+    {
+        cout<<"NO SOLUTION\n";
+        return;
+    }
+    int i,j;
+    if(n%2==0)
+    {
+        j=n/2;
+        i=j-1;
+    }
+    else
+    {
+        s[n/2]=(char)(pos+65);
+        freq[pos]--;
+        i=(n/2)-1;
+        j=i+2;
+    }
+    for(int k=0;k<26;k++)
+    {
+        while(freq[k])
+        {
+            s[i]=(char)(k+65);
+            s[j]=(char)(k+65);
+            i--,j++;
+            freq[k]-=2;
+        }
+    }
+    cout<<s;
+}
+ 
+int main()
+{
+    int t=1;
+    while(t--)
+    {
+        solve();
+    }
+}
