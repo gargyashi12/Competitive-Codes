@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+void solve()
+{
+    ll x,y;
+    cin>>x>>y;
+    ll mx=max(x,y);
+    ll start=((mx-1)*(mx-1))+1;
+    ll end=mx*mx;
+    ll mid=(start+end)/2;
+    if(mx%2==0)
+    {
+        if(mx==x && mx==y)
+        cout<<mid<<"\n";
+        else if(mx==x)
+            cout<<mid+(x-y)<<"\n";
+        else
+        cout<<mid-(y-x)<<"\n";
+    }
+    else
+    {
+        if(mx==x && mx==y)
+        cout<<mid<<"\n";
+        else if(mx==x)
+            cout<<mid-(x-y)<<"\n";
+        else
+        cout<<mid+(y-x)<<"\n";
+    }
+}
+
+int main()
+{
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        solve();
+    }
+}
