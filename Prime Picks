@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define mp make_pair
+#define ll long long
+#define S second
+#define F first
+#define FAST ios_base::sync_with_stdio(false); cin.tie(NULL)
+
+void sieve(int N,vector <ll> & pfx,vector <int> &pr)
+{
+    int lp[N+1]={0};
+    for (int i=2; i<=N; ++i) 
+    {
+        if (lp[i] == 0) 
+        {
+            lp[i] = i;
+            pr.pb(i);
+            if(pfx.size()==0)
+            pfx.pb(i);
+            else
+            {
+                int x=pfx[pfx.size()-1];
+                pfx.pb((i+x)%1000000007);
+            }
+        }
+        for (int j=0; j<(int)pr.size() && pr[j]<=lp[i] && i*pr[j]<=N; ++j)
+        lp[i * pr[j]] = pr[j];
+    }
+}
+void solve()
+{
+    int n;
+    cin>>n;
+    ll k[n],mx=-1,total=1;
+    for(int i=0;i<n;i++)
+    {
+        cin>>k[i];
+        if(k[i]>mx)
+        mx=k[i];
+    }
+    vector <ll> pfx;
+    vector <int> pr;
+    sieve(mx,pfx,pr);
+    for(int i=0;i<n;i++)
+    {
+        int l=0,h=pr.size()-1,res=-1;
+        while(l<=h)
+        {
+            int mid=l+(h-l)/2;
+            if(pr[mid]==k[i])
+            {
+                res=mid;
+                break;
+            }
+            else if(pr[mid]<k[i])
+            {
+                res=mid;
+                l=mid+1;
+            }
+            else h=mid-1;
+        }
+        if(res!=-1)
+            total=total*pfx[res]%1000000007;
+    }
+    cout<<total<<"\n";
+}
+int main()
+{
+    FAST;
+    int t;
+    cin>>t;
+    while(t--)
+        solve();
+}
